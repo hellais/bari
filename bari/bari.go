@@ -161,9 +161,7 @@ func install_package(name string) {
     if (ok) {
       fmt.Println("Package name:", pkg_name);
     }
-
   }
-
 }
 
 func main() {
