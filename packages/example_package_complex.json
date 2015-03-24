@@ -20,7 +20,7 @@
   {
     "os": "linux",
     "distro": "archlinux",
-    "pkg": "XXX",
+    "pkg": "XXX"
   },
 
   {
@@ -28,13 +28,13 @@
     "distro": "ubuntu",
     "pkg": "XXX",
     "pkg_version": "XXX",
-    "repo": "universe",
+    "repo": "universe"
   },
 
   {
     "os": "linux",
     "distro": "centos",
-    "pkg": "XXX",
+    "pkg": "XXX"
   },
 
   {
