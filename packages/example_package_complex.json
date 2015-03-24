@@ -1,0 +1,47 @@
+[
+  {
+    "os": "linux",
+    "distro": "debian",
+    "release": ">=7.7",
+    "arch": ["amd64", "i386"],
+    "pkg_manager": "apt",
+    "pkg": "XXX",
+    "priority": 0
+  },
+
+  {
+    "priority": -2,
+    "os": "multi",
+    "pkg_manager": "pip",
+    "pkg_manager_version": ">=1.5",
+    "pkg": "XXX"
+  },
+
+  {
+    "os": "linux",
+    "distro": "archlinux",
+    "pkg": "XXX",
+  },
+
+  {
+    "os": "linux",
+    "distro": "ubuntu",
+    "pkg": "XXX",
+    "pkg_version": "XXX",
+    "repo": "universe",
+  },
+
+  {
+    "os": "linux",
+    "distro": "centos",
+    "pkg": "XXX",
+  },
+
+  {
+    "os": "osx",
+    "release": ">=10.8",
+    "pkg_manager": "homebrew",
+    "pkg_manager_version": ">=0.9.5",
+    "pkg_name": "XXX"
+  }
+]

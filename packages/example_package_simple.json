@@ -1,0 +1,38 @@
+[
+  {
+    "os": "linux",
+    "distro": "debian",
+    "pkg": "XXX",
+  },
+
+  {
+    "os": "multi",
+    "pkg_manager": "pip",
+    "pkg_manager_version": ">=1.5",
+    "pkg": "XXX"
+  },
+
+  {
+    "os": "linux",
+    "distro": "archlinux",
+    "pkg": "XXX",
+  },
+
+  {
+    "os": "linux",
+    "distro": "ubuntu",
+    "pkg": "XXX",
+  },
+
+  {
+    "os": "linux",
+    "distro": "centos",
+    "pkg": "XXX",
+  },
+
+  {
+    "os": "osx",
+    "pkg_manager": "homebrew",
+    "pkg_name": "XXX"
+  }
+]
