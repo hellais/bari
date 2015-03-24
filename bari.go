@@ -4,38 +4,48 @@ import (
   "os"
   "log"
   "fmt"
-	"encoding/json"
+  "strings"
 
   "github.com/codegangsta/cli"
 )
 
-type Package map[string]interface{};
+func show_install_instructions(name string) {
+  pkgs := loadPackages(name);
 
-type Packages []Package;
-
+  for _, pkg := range pkgs {
+    if (pkg.os != "") {
+      output := "# " + pkg.os;
+      if (pkg.distro != "") {
+        output = output + " " + pkg.distro;
+      }
+      if (pkg.release != "") {
+        output = output + " release: " + pkg.release;
+      }
+      fmt.Println(output);
+    }
+    
+    if (pkg.pkg_manager != "") {
+      output := "# using " + pkg.pkg_manager;
+      if (pkg.pkg_manager_version != "") {
+        output = output + " version: " + pkg.pkg_manager_version;
+      }
+      fmt.Println(output);
+    }
+    
+    fmt.Println("# run:");
+    fmt.Println(strings.Join(pkg.install_command(), " "));
+    fmt.Println();
+  }
+}
 
 func install_package(name string) {
   var platform Platform;
   platform.detect();
 
-  pkgsDirectory := "packages/";
-  pkgFilePath := pkgsDirectory + name + ".json";
-  pkgFile, err := os.Open(pkgFilePath);
+  var supportedPackages []Package;
 
-  if err != nil {
-    log.Fatal("Error in opening descriptor for package ", name);
-  }
+  pkgs := loadPackages(name);
 
-  var pkgs Packages;
-  var supportedPackages Packages;
-
-  decoder := json.NewDecoder(pkgFile);
-  err = decoder.Decode(&pkgs);
-  if err != nil {
-    log.Fatal(err);
-    log.Fatal("Error in decoding descriptor for package ", name);
-  }
-  
   for _, pkg := range pkgs {
     if platform.supports(pkg) {
       supportedPackages = append(supportedPackages, pkg);
@@ -48,29 +58,31 @@ func install_package(name string) {
   
   fmt.Println("# Install options");
   for _, pkg := range supportedPackages {
-    pkg_manager, ok := pkg["pkg_manager"];
+    pkg_manager, ok := pkg.json["pkg_manager"];
     if (ok) {
       fmt.Println("##", pkg_manager);
     }
-    pkg_manager_version, ok := pkg["pkg_manager_version"];
+    pkg_manager_version, ok := pkg.json["pkg_manager_version"];
     if (ok) {
       fmt.Println("Package manager version:", pkg_manager_version);
     }
 
-    OS, ok := pkg["os"];
+    OS, ok := pkg.json["os"];
     if (ok) {
       fmt.Println("Operating system:", OS);
     }
 
-    release, ok := pkg["release"];
+    release, ok := pkg.json["release"];
     if (ok) {
       fmt.Println("Release:", release);
     }
 
-    pkg_name, ok := pkg["pkg"];
+    pkg_name, ok := pkg.json["pkg"];
     if (ok) {
       fmt.Println("Package name:", pkg_name);
     }
+
+    fmt.Println("Install command: ", pkg.install_command());
   }
 }
 
@@ -103,8 +115,7 @@ func main() {
           cli.ShowAppHelp(c);
           log.Fatal("You MUST specify a package name");
         }
-        //log.Print("Installing ", pkg_name);
-        install_package(pkg_name);
+        show_install_instructions(pkg_name);
       },
     },
   };

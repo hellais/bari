@@ -81,16 +81,14 @@ func (p *Platform) release_supported(release interface{}) bool {
 }
 
 func (p *Platform) supports(pkg Package) bool {
-  os, ok := pkg["os"];
-  if (ok && os != "multi" && os != p.os) {
-    return false;   
+  if (pkg.os != "multi" && pkg.os != p.os) {
+    return false;
   }
-  distro, ok := pkg["distro"];
-  if (ok && distro != p.distro) {
-    return false;   
+  if (pkg.distro != p.distro) {
+    return false;
   }
-  release, ok := pkg["release"];
-  if (ok && p.release_supported(release) == false) {
+  if (pkg.release != "" && p.release_supported(pkg.release)) {
+    return false;
   }
   //pkg_manager, ok := pkg["pkg_manager"];
   //arch, ok := pkg["arch"];

@@ -42,6 +42,6 @@
     "release": ">=10.8",
     "pkg_manager": "homebrew",
     "pkg_manager_version": ">=0.9.5",
-    "pkg_name": "XXX"
+    "pkg": "XXX"
   }
 ]
