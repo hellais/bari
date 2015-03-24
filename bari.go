@@ -9,6 +9,9 @@ import (
   "runtime"
   "regexp"
 	"encoding/json"
+  
+  "github.com/hellais/bari/bari/platform"
+
   "github.com/codegangsta/cli"
   "github.com/mcuadros/go-version"
 )
@@ -171,7 +174,22 @@ func main() {
   app.Commands = []cli.Command{
     {
       Name: "install",
+      Aliases: []string{"i"},
       Usage: "Install the specified package on your system",
+      Action: func(c *cli.Context) {
+        pkg_name := c.Args().First();
+        if pkg_name == "" {
+          cli.ShowAppHelp(c);
+          log.Fatal("You MUST specify a package name");
+        }
+        //log.Print("Installing ", pkg_name);
+        install_package(pkg_name);
+      },
+    },
+
+    {
+      Name: "show",
+      Usage: "Show the setup instructions for the specified package",
       Action: func(c *cli.Context) {
         pkg_name := c.Args().First();
         if pkg_name == "" {
