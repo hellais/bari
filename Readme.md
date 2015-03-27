@@ -38,3 +38,8 @@ To see how package descriptors should look like, look at
 `packages/example_package_complex.json`.
 
 TODO add a full specification of the package descriptor microformat
+
+
+## Ethimology
+
+* http://en.wikipedia.org/wiki/Korean_mythology#Myths_about_shamans
