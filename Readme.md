@@ -1,4 +1,4 @@
-# Bari
+![BARI](https://raw.githubusercontent.com/hellais/bari/master/bari.png)
 
 Bari is a universal package installer that is meant to support every OS.
 Instead of re-inventing the wheel bari just keeps a database of the equivalent
